@@ -107,6 +107,7 @@ class InvestigationEngine:
             ai_result = await self._ai.analyze_content(text_content)
 
         if ai_result.get("error"):
+            provider_name = ai_result.get("provider") or "unknown"
             return InvestigationResult(
                 content_hash=content_hash,
                 timestamp=now,
@@ -117,25 +118,25 @@ class InvestigationEngine:
                 evidence_chain=[
                     SourceEvidence(
                         type="ai_analysis",
-                        source=ai_result.get("provider", "none"),
+                        source=provider_name,
                         query=None,
                         result_summary="AI analysis failed",
                         timestamp=now,
                         url=None,
                     )
                 ],
-                ai_model=ai_result.get("provider", "none"),
+                ai_model=provider_name,
                 da_blob_id=None,
                 tx_hash=None,
             )
 
-        ai_provider = ai_result.get("provider", "unknown")
+        ai_provider = ai_result.get("provider") or "unknown"
         evidence_chain.append(
             SourceEvidence(
                 type="ai_analysis",
                 source=ai_provider,
                 query=None,
-                result_summary=ai_result.get("summary", "")[:500],
+                result_summary=(ai_result.get("summary") or "")[:500],
                 timestamp=now,
                 url=None,
             )
@@ -148,12 +149,13 @@ class InvestigationEngine:
             try:
                 web_results = await self._search.search(query, max_results=5)
                 for r in web_results:
+                    src = r.get("title") or r.get("source") or "web"
                     evidence_chain.append(
                         SourceEvidence(
                             type="web_search",
-                            source=r.get("title", "web"),
+                            source=src,
                             query=query,
-                            result_summary=(r.get("snippet", "") or r.get("body", ""))[:300],
+                            result_summary=(r.get("snippet") or r.get("body") or "")[:300],
                             timestamp=now,
                             url=r.get("url"),
                         )
