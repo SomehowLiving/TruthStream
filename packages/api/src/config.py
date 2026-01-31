@@ -32,6 +32,7 @@ class Settings(BaseSettings):
 
     # Optional: AI providers (Phase 2+)
     anthropic_api_key: Optional[str] = None
+    groq_api_key: Optional[str] = None
     perplexity_api_key: Optional[str] = None
 
     @property
