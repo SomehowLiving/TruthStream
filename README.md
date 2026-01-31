@@ -115,7 +115,7 @@ Without 0G, real-time, public AI verification would be prohibitively slow or exp
 
 ## 9. License
 
-MIT License © 2025 TruthStream Contributors
+MIT License © 2026 TruthStream Contributors
 
 ---
 
