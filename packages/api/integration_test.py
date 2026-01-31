@@ -155,8 +155,11 @@ def main_sync():
                 settings.contract_address,
                 settings.og_private_key,
             )
-            chain_result = asyncio.run(chain.verify_content(
-                file_hash, blob_id, verdict, int(confidence * 100)
+            chain_result = asyncio.run(chain.certify_truth(
+                content_hash=file_hash,
+                blob_id=blob_id,
+                confidence=int(confidence * 100),
+                metadata_uri=""
             ))
             tx_hash = chain_result.get("tx_hash")
             explorer_url = chain_result.get("explorer_url", explorer_url)
