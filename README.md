@@ -63,6 +63,23 @@ Each verification produces an immutable on-chain reference backed by transparent
 
 **Flow:** Upload → AI investigation → 0G DA anchoring → Shareable Truth Certificate
 
+### Landing page 
+
+![alt text](demo/1.png) 
+### Upload the file(img, vid or txt)
+![alt text](demo/2.png) 
+
+### Analysis
+![alt text](demo/3.png) 
+
+### Results 
+![alt text](demo/4.png) 
+
+### Chain details(tx)
+![alt text](demo/5.png) 
+
+### About TruthStream
+![alt text](demo/6.png)
 ---
 
 ## 6. High-Level Architecture
